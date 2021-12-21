@@ -84,20 +84,40 @@ export async function removeRule(options?: { [key: string]: any }) {
   });
 }
 
-/** 查询漏洞列表 GET /api/vulList/ */
+/** 查询漏洞列表 GET /api/totalVulList/ */
 export async function vulList() {
-  return request<API.VulList>('/api/vulList/', {
+
+  return request<API.VulList>('/api/totalVulList/', {
     method: 'GET',
   });
 }
 
-/** 新建漏洞 POST /api/vulList/ */
+/** 新建漏洞 POST /api/totalVulList/ */
 export async function addVul(options?: any) {
   console.log(JSON.stringify(options))
-  return request<API.VulListItem>('/api/vulList/', {
+  return request<API.VulListItem>('/api/totalVulList/', {
     method: 'POST',
-    body: JSON.stringify(options)
+    body: JSON.stringify(options),
   });
 }
 
+/** 删除漏洞 DELETE /api/totalVulList/ */
+export async function removeVul(options?: { [key: string]: any }) {
+  console.log(options)
+  options?.key.forEach((val:any) => {
+    return request<Record<string, any>>('/api/totalVulList/' + val.toString() +'/', {
+      method: 'DELETE',
+    });
+  })
+
+}
+
+/** 更新漏洞 PUT /api/totalVulList/ */
+export async function updateVul(options?: any) {
+  console.log(JSON.stringify(options));
+  return request<API.VulListItem>('/api/totalVulList/'+ options.vul_id + '/', {
+    method: 'PUT',
+    body: JSON.stringify(options),
+  });
+}
 

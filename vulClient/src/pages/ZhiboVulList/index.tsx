@@ -10,7 +10,7 @@ import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
-import { updateVul, removeVul, vulList, addVul } from '@/services/ant-design-pro/api';
+import { updateVul, removeVul, vulList, addVul } from '@/services/ant-design-pro/zhiboApi';
 
 /**
  * @en-US Add node
