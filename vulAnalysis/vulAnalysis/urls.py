@@ -33,13 +33,13 @@ urlpatterns = [
 
     re_path('^api/mdnVulList/$', views.MdnVulListView.as_view()),
     re_path('^api/mdnVulList/(?P<pk>\d+)/$', views.MdnVulListDetailView.as_view()),
-
+    #mdc漏洞路由
     re_path('^api/mdcVulList/$', views.MdcVulListView.as_view()),
     re_path('^api/mdcVulList/(?P<pk>\d+)/$', views.MdcVulListDetailView.as_view()),
-
+    #其他漏洞路由
     re_path('^api/otherVulList/$', views.OtherVulListView.as_view()),
     re_path('^api/otherVulList/(?P<pk>\d+)/$', views.OtherVulListDetailView.as_view()),
-
+    #所有漏洞路由
     re_path('^api/totalVulList/$', views.TotalVulListView.as_view()),
     re_path('^api/totalVulList/(?P<pk>\d+)/$', views.TotalVulListDetailView.as_view()),
 
