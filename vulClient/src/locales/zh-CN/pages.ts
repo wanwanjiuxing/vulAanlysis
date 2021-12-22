@@ -94,4 +94,5 @@ export default {
   'pages.searchTable.updateForm.step1': 'step1',
   'pages.searchTable.updateForm.step2': 'step2',
   'pages.searchTable.updateForm.step3': 'step3',
+  'pages.welcome.Message': '欢迎使用，更多产品功能开发中。。。',
 };

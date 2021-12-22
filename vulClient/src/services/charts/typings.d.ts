@@ -1,7 +1,7 @@
 // @ts-ignore
 /* eslint-disable */
 
-declare namespace API {
+declare namespace API2 {
   type CurrentUser = {
     name?: string;
     avatar?: string;

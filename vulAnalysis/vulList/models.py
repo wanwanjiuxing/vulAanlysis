@@ -12,7 +12,7 @@ class Youke_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 
 class Zhibo_VulModel(models.Model):
@@ -26,7 +26,7 @@ class Zhibo_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 class Qibo_VulModel(models.Model):
     vul_id = models.CharField(max_length=128,verbose_name="漏洞编号",default="0000000000")
@@ -39,7 +39,7 @@ class Qibo_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 class Myun_VulModel(models.Model):
     vul_id = models.CharField(max_length=128,verbose_name="漏洞编号",default="0000000000")
@@ -52,7 +52,7 @@ class Myun_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 class Mdn_VulModel(models.Model):
     vul_id = models.CharField(max_length=128,verbose_name="漏洞编号",default="0000000000")
@@ -65,7 +65,7 @@ class Mdn_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 class Mdc_VulModel(models.Model):
     vul_id = models.CharField(max_length=128,verbose_name="漏洞编号",default="0000000000")
@@ -78,7 +78,7 @@ class Mdc_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 class Other_VulModel(models.Model):
     vul_id = models.CharField(max_length=128,verbose_name="漏洞编号",default="0000000000")
@@ -91,7 +91,7 @@ class Other_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
 
 class Total_VulModel(models.Model):
     vul_id = models.CharField(max_length=128,verbose_name="漏洞编号",default="0000000000")
@@ -104,4 +104,4 @@ class Total_VulModel(models.Model):
     vul_fixedtime = models.CharField(max_length=128,verbose_name="完成修复时间",default="2020-10-10 01:01:00")
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
-    vul_remarks = models.CharField(max_length=255,verbose_name="备注")
+    vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")

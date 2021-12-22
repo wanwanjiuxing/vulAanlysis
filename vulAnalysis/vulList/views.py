@@ -51,9 +51,25 @@ class YoukeVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed = vul_dict['vul_isfixed'],
+                vul_type = vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -67,6 +83,9 @@ class YoukeVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -103,7 +122,8 @@ class YoukeVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Youke_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -121,6 +141,19 @@ class YoukeVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -143,12 +176,14 @@ class YoukeVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Youke_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -200,9 +235,25 @@ class QiboVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -216,6 +267,9 @@ class QiboVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -252,7 +306,8 @@ class QiboVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Qibo_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -270,6 +325,19 @@ class QiboVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -292,12 +360,14 @@ class QiboVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Qibo_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -316,17 +386,17 @@ class ZhiboVulListView(View):
         vuls_list = []
         for vul in vuls:
             vul_dict = {
-                "vul_id":vul.vul_id,
-                "vul_name":vul.vul_name,
-                "vul_jira":vul.vul_jira,
-                "vul_sendto":vul.vul_sendto,
-                "vul_fixer":vul.vul_fixer,
-                "vul_sendtime":vul.vul_sendtime,
-                "vul_estimatefixedtime":vul.vul_estimatefixedtime,
-                "vul_fixedtime":vul.vul_fixedtime,
-                "vul_isfixed":vul.vul_isfixed,
-                "vul_type":vul.vul_type,
-                "vul_remarks":vul.vul_remarks,
+                "vul_id": vul.vul_id,
+                "vul_name": vul.vul_name,
+                "vul_jira": vul.vul_jira,
+                "vul_sendto": vul.vul_sendto,
+                "vul_fixer": vul.vul_fixer,
+                "vul_sendtime": vul.vul_sendtime,
+                "vul_estimatefixedtime": vul.vul_estimatefixedtime,
+                "vul_fixedtime": vul.vul_fixedtime,
+                "vul_isfixed": vul.vul_isfixed,
+                "vul_type": vul.vul_type,
+                "vul_remarks": vul.vul_remarks,
             }
             vuls_list.append(vul_dict)
         return JsonResponse({
@@ -349,9 +419,25 @@ class ZhiboVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -365,6 +451,9 @@ class ZhiboVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -401,7 +490,8 @@ class ZhiboVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Zhibo_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -419,6 +509,19 @@ class ZhiboVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -441,12 +544,14 @@ class ZhiboVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Zhibo_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -465,17 +570,17 @@ class MyunVulListView(View):
         vuls_list = []
         for vul in vuls:
             vul_dict = {
-                "vul_id":vul.vul_id,
-                "vul_name":vul.vul_name,
-                "vul_jira":vul.vul_jira,
-                "vul_sendto":vul.vul_sendto,
-                "vul_fixer":vul.vul_fixer,
-                "vul_sendtime":vul.vul_sendtime,
-                "vul_estimatefixedtime":vul.vul_estimatefixedtime,
-                "vul_fixedtime":vul.vul_fixedtime,
-                "vul_isfixed":vul.vul_isfixed,
-                "vul_type":vul.vul_type,
-                "vul_remarks":vul.vul_remarks,
+                "vul_id": vul.vul_id,
+                "vul_name": vul.vul_name,
+                "vul_jira": vul.vul_jira,
+                "vul_sendto": vul.vul_sendto,
+                "vul_fixer": vul.vul_fixer,
+                "vul_sendtime": vul.vul_sendtime,
+                "vul_estimatefixedtime": vul.vul_estimatefixedtime,
+                "vul_fixedtime": vul.vul_fixedtime,
+                "vul_isfixed": vul.vul_isfixed,
+                "vul_type": vul.vul_type,
+                "vul_remarks": vul.vul_remarks,
             }
             vuls_list.append(vul_dict)
         return JsonResponse({
@@ -498,9 +603,24 @@ class MyunVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -514,6 +634,9 @@ class MyunVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -550,7 +673,8 @@ class MyunVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Myun_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -568,6 +692,19 @@ class MyunVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -590,12 +727,14 @@ class MyunVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Myun_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -614,17 +753,17 @@ class MdnVulListView(View):
         vuls_list = []
         for vul in vuls:
             vul_dict = {
-                "vul_id":vul.vul_id,
-                "vul_name":vul.vul_name,
-                "vul_jira":vul.vul_jira,
-                "vul_sendto":vul.vul_sendto,
-                "vul_fixer":vul.vul_fixer,
-                "vul_sendtime":vul.vul_sendtime,
-                "vul_estimatefixedtime":vul.vul_estimatefixedtime,
-                "vul_fixedtime":vul.vul_fixedtime,
-                "vul_isfixed":vul.vul_isfixed,
-                "vul_type":vul.vul_type,
-                "vul_remarks":vul.vul_remarks,
+                "vul_id": vul.vul_id,
+                "vul_name": vul.vul_name,
+                "vul_jira": vul.vul_jira,
+                "vul_sendto": vul.vul_sendto,
+                "vul_fixer": vul.vul_fixer,
+                "vul_sendtime": vul.vul_sendtime,
+                "vul_estimatefixedtime": vul.vul_estimatefixedtime,
+                "vul_fixedtime": vul.vul_fixedtime,
+                "vul_isfixed": vul.vul_isfixed,
+                "vul_type": vul.vul_type,
+                "vul_remarks": vul.vul_remarks,
             }
             vuls_list.append(vul_dict)
         return JsonResponse({
@@ -647,9 +786,24 @@ class MdnVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -663,6 +817,9 @@ class MdnVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -699,7 +856,8 @@ class MdnVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Mdn_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -717,6 +875,19 @@ class MdnVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -739,12 +910,14 @@ class MdnVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Mdn_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -796,9 +969,24 @@ class MdcVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -812,6 +1000,9 @@ class MdcVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -848,7 +1039,8 @@ class MdcVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Mdc_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -866,6 +1058,19 @@ class MdcVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -888,12 +1093,14 @@ class MdcVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Mdc_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -912,17 +1119,17 @@ class OtherVulListView(View):
         vuls_list = []
         for vul in vuls:
             vul_dict = {
-                "vul_id":vul.vul_id,
-                "vul_name":vul.vul_name,
-                "vul_jira":vul.vul_jira,
-                "vul_sendto":vul.vul_sendto,
-                "vul_fixer":vul.vul_fixer,
-                "vul_sendtime":vul.vul_sendtime,
-                "vul_estimatefixedtime":vul.vul_estimatefixedtime,
-                "vul_fixedtime":vul.vul_fixedtime,
-                "vul_isfixed":vul.vul_isfixed,
-                "vul_type":vul.vul_type,
-                "vul_remarks":vul.vul_remarks,
+                "vul_id": vul.vul_id,
+                "vul_name": vul.vul_name,
+                "vul_jira": vul.vul_jira,
+                "vul_sendto": vul.vul_sendto,
+                "vul_fixer": vul.vul_fixer,
+                "vul_sendtime": vul.vul_sendtime,
+                "vul_estimatefixedtime": vul.vul_estimatefixedtime,
+                "vul_fixedtime": vul.vul_fixedtime,
+                "vul_isfixed": vul.vul_isfixed,
+                "vul_type": vul.vul_type,
+                "vul_remarks": vul.vul_remarks,
             }
             vuls_list.append(vul_dict)
         return JsonResponse({
@@ -945,9 +1152,24 @@ class OtherVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel(
+                vul_id=vul_dict['vul_id'],
+                vul_name=vul_dict['vul_name'],
+                vul_jira=vul_dict['vul_jira'],
+                vul_sendto=vul_dict['vul_sendto'],
+                vul_fixer=vul_dict['vul_fixer'],
+                vul_sendtime=vul_dict['vul_sendtime'],
+                vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
+                vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
+            )
+            vulTTL.save()
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -961,6 +1183,9 @@ class OtherVulListView(View):
             "vul_sendtime": vul.vul_sendtime,
             "vul_estimatefixedtime": vul.vul_estimatefixedtime,
             "vul_fixedtime": vul.vul_fixedtime,
+            "vul_isfixed": vul.vul_isfixed,
+            "vul_type": vul.vul_type,
+            "vul_remarks": vul.vul_remarks,
         }
         return JsonResponse({
             "success": "200",
@@ -997,7 +1222,8 @@ class OtherVulListDetailView(View):
     def put(self,request,pk):
         try:
             vul = Other_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
@@ -1015,6 +1241,19 @@ class OtherVulListDetailView(View):
         vul.vul_type = vul_dict['vul_type']
         vul.vul_remarks = vul_dict['vul_remarks']
         vul.save()
+
+        vulTTL.vul_id = vul_dict['vul_id']
+        vulTTL.vul_name = vul_dict['vul_name']
+        vulTTL.vul_jira = vul_dict['vul_jira']
+        vulTTL.vul_sendto = vul_dict['vul_sendto']
+        vulTTL.vul_fixer = vul_dict['vul_fixer']
+        vulTTL.vul_sendtime = vul_dict['vul_sendtime']
+        vulTTL.vul_estimatefixedtime = vul_dict['vul_estimatefixedtime']
+        vulTTL.vul_fixedtime = vul_dict['vul_fixedtime']
+        vulTTL.vul_isfixed = vul_dict['vul_isfixed']
+        vulTTL.vul_type = vul_dict['vul_type']
+        vulTTL.vul_remarks = vul_dict['vul_remarks']
+        vulTTL.save()
 
         res_dict = {
             "vul_id": vul.vul_id,
@@ -1037,12 +1276,14 @@ class OtherVulListDetailView(View):
     def delete(self,request,pk):
         try:
             vul =Other_VulModel.objects.get(vul_id=pk)
-        except vul.DoesNotExist:
+            vulTTL = Total_VulModel.objects.get(vul_id=pk)
+        except vul.DoesNotExist or vulTTL.DoesNotExist:
             return JsonResponse({
                 "success": "404",
                 "data": "未查询到内容",
             })
         vul.delete()
+        vulTTL.delete()
         return JsonResponse({
             "success": "200",
             "data": "删除成功",
@@ -1094,6 +1335,8 @@ class TotalVulListView(View):
                 vul_sendtime=vul_dict['vul_sendtime'],
                 vul_estimatefixedtime=vul_dict['vul_estimatefixedtime'],
                 vul_fixedtime=vul_dict['vul_fixedtime'],
+                vul_isfixed=vul_dict['vul_isfixed'],
+                vul_type=vul_dict['vul_type'],
             )
             vul.save()
         except vul.DoesNotExist:

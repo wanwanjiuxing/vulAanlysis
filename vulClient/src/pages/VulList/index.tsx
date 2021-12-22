@@ -1,105 +1,101 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, message , Drawer } from 'antd';
+import { Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { PageContainer,} from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { ModalForm, ProFormText, } from '@ant-design/pro-form';
 import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import type { FormValueType } from './components/UpdateForm';
-import UpdateForm from './components/UpdateForm';
-import { updateVul, removeVul, vulList, addVul } from '@/services/ant-design-pro/api';
+import { vulList, } from '@/services/ant-design-pro/api';
 
 /**
  * @en-US Add node
  * @zh-CN 添加节点
  * @param fields
  */
-const handleAdd = async (fields: API.VulListItem) => {
-  const hide = message.loading('正在添加');
-  try {
-    await addVul({ ...fields });
-    hide();
-    message.success('添加成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('添加失败, 请重新尝试');
-    return false;
-  }
-};
-
-/**
- * @en-US Update node
- * @zh-CN 更新节点
- *
- * @param fields
- */
-const handleUpdate = async (fields: FormValueType) => {
-  console.log(fields);
-  const hide = message.loading('Configuring');
-  try {
-    await updateVul(fields);
-    hide();
-
-    message.success('Configuration is successful');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Configuration failed, please try again!');
-    return false;
-  }
-};
-
-/**
- *  Delete node
- * @zh-CN 删除节点
- *
- * @param selectedRows
- */
-const handleRemove = async (selectedRows: API.VulListItem[]) => {
-  const hide = message.loading('正在删除');
-  if (!selectedRows) return true;
-  try {
-    await removeVul({
-      key: selectedRows.map((row) => row.vul_id),
-    });
-    hide();
-    message.success('删除成功，重新加载中');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('删除失败, 请重新尝试');
-    return false;
-  }
-};
+// const handleAdd = async (fields: API.VulListItem) => {
+//   const hide = message.loading('正在添加');
+//   try {
+//     await addVul({ ...fields });
+//     hide();
+//     message.success('添加成功');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('添加失败, 请重新尝试');
+//     return false;
+//   }
+// };
+//
+// /**
+//  * @en-US Update node
+//  * @zh-CN 更新节点
+//  *
+//  * @param fields
+//  */
+// const handleUpdate = async (fields: FormValueType) => {
+//   console.log(fields);
+//   const hide = message.loading('Configuring');
+//   try {
+//     await updateVul(fields);
+//     hide();
+//
+//     message.success('Configuration is successful');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('Configuration failed, please try again!');
+//     return false;
+//   }
+// };
+//
+// /**
+//  *  Delete node
+//  * @zh-CN 删除节点
+//  *
+//  * @param selectedRows
+//  */
+// const handleRemove = async (selectedRows: API.VulListItem[]) => {
+//   const hide = message.loading('正在删除');
+//   if (!selectedRows) return true;
+//   try {
+//     await removeVul({
+//       key: selectedRows.map((row) => row.vul_id),
+//     });
+//     hide();
+//     message.success('删除成功，重新加载中');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('删除失败, 请重新尝试');
+//     return false;
+//   }
+// };
 
 const TableList: React.FC = () => {
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
    *  */
-  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
+  // const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
    * */
-  const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  // const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.VulListItem>();
-  const [selectedRowsState, setSelectedRows] = useState<API.VulListItem[]>([]);
+  // const [selectedRowsState, setSelectedRows] = useState<API.VulListItem[]>([]);
 
   /**
    * @en-US International configuration
    * @zh-CN 国际化配置
    * */
   const intl = useIntl();
-  const rowList: API.VulListItem[] = [];
+  // const rowList: API.VulListItem[] = [];
 
   const columns: ProColumns<API.VulListItem>[] = [
     {
@@ -171,35 +167,35 @@ const TableList: React.FC = () => {
     },
 
 
-    {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
-      dataIndex: 'option',
-      valueType: 'option',
-      render: (_, record) => [
-        <a
-          key="config"
-          onClick={() => {
-            handleUpdateModalVisible(true);
-            setCurrentRow(record);
-          }}
-        >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="edition" />
-        </a>,
-        <a
-          key="deleteVul"
-          onClick={async () => {
-            rowList.push(record);
-            await handleRemove(rowList);
-            setSelectedRows([]);
-            actionRef.current?.reloadAndRest?.();
-          }}>
-          <FormattedMessage
-            id="pages.searchTable.deleteVulOption"
-            defaultMessage="deleteVulOption"
-          />
-        </a>,
-      ],
-    },
+    // {
+    //   title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
+    //   dataIndex: 'option',
+    //   valueType: 'option',
+    //   render: (_, record) => [
+    //     <a
+    //       key="config"
+    //       onClick={() => {
+    //         handleUpdateModalVisible(true);
+    //         setCurrentRow(record);
+    //       }}
+    //     >
+    //       <FormattedMessage id="pages.searchTable.config" defaultMessage="edition" />
+    //     </a>,
+    //     <a
+    //       key="deleteVul"
+    //       onClick={async () => {
+    //         rowList.push(record);
+    //         await handleRemove(rowList);
+    //         setSelectedRows([]);
+    //         actionRef.current?.reloadAndRest?.();
+    //       }}>
+    //       <FormattedMessage
+    //         id="pages.searchTable.deleteVulOption"
+    //         defaultMessage="deleteVulOption"
+    //       />
+    //     </a>,
+    //   ],
+    // },
   ];
 
   return (
@@ -214,299 +210,299 @@ const TableList: React.FC = () => {
         search={{
           labelWidth: 120,
         }}
-        toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            onClick={() => {
-              handleModalVisible(true);
-            }}
-          >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
-          </Button>,
-        ]}
+        // toolBarRender={() => [
+        //   <Button
+        //     type="primary"
+        //     key="primary"
+        //     onClick={() => {
+        //       handleModalVisible(true);
+        //     }}
+        //   >
+        //     <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
+        //   </Button>,
+        // ]}
         request={vulList}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
-      {selectedRowsState?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="Chosen" />{' '}
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
-              <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
-            </div>
-          }
-        >
-          <Button
-            onClick={async () => {
-              await handleRemove(selectedRowsState);
-              setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
-            }}
-            type="primary"
-          >
-            <FormattedMessage
-              id="pages.searchTable.batchDeletion"
-              defaultMessage="Batch deletion"
-            />
-          </Button>
+      {/*{selectedRowsState?.length > 0 && (*/}
+      {/*  <FooterToolbar*/}
+      {/*    extra={*/}
+      {/*      <div>*/}
+      {/*        <FormattedMessage id="pages.searchTable.chosen" defaultMessage="Chosen" />{' '}*/}
+      {/*        <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}*/}
+      {/*        <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />*/}
+      {/*      </div>*/}
+      {/*    }*/}
+      {/*  >*/}
+      {/*    <Button*/}
+      {/*      onClick={async () => {*/}
+      {/*        await handleRemove(selectedRowsState);*/}
+      {/*        setSelectedRows([]);*/}
+      {/*        actionRef.current?.reloadAndRest?.();*/}
+      {/*      }}*/}
+      {/*      type="primary"*/}
+      {/*    >*/}
+      {/*      <FormattedMessage*/}
+      {/*        id="pages.searchTable.batchDeletion"*/}
+      {/*        defaultMessage="Batch deletion"*/}
+      {/*      />*/}
+      {/*    </Button>*/}
 
-        </FooterToolbar>
-      )}
-      <ModalForm
-        title={intl.formatMessage({
-          id: 'pages.searchTable.createForm.newVul',
-          defaultMessage: 'New vul',
-        })}
-        width="400px"
-        visible={createModalVisible}
-        onVisibleChange={handleModalVisible}
-        onFinish={async (value) => {
-          const success = await handleAdd(value as API.VulListItem);
-          if (success) {
-            handleModalVisible(false);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-      >
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_id"
-                  defaultMessage="漏洞编号必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_id"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_id',
-            defaultMessage: '漏洞编号',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_name"
-                  defaultMessage="漏洞名称必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_name"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_name',
-            defaultMessage: '漏洞名称',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_jira"
-                  defaultMessage="jira工单为必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_jira"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_jira',
-            defaultMessage: 'jira工单',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_sendto"
-                  defaultMessage="发送对象必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_sendto"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_sendto',
-            defaultMessage: '发送对象',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_fixer"
-                  defaultMessage="修复人员必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_fixer"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_fixer',
-            defaultMessage: '修复人员',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_sendtime"
-                  defaultMessage="发送时间必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_sendtime"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_sendtime',
-            defaultMessage: '发送时间',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_estimatefixedtime"
-                  defaultMessage="预计修复时间必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_estimatefixedtime"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_estimatefixedtime',
-            defaultMessage: '预计修复时间',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_fixedtime"
-                  defaultMessage="完成修复时间必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_fixedtime"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_fixedtime',
-            defaultMessage: '完成修复时间',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_isfixed"
-                  defaultMessage="是否修复必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_isfixed"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_isfixed',
-            defaultMessage: '是否修复',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_type"
-                  defaultMessage="漏洞类别必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_type"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_type',
-            defaultMessage: '漏洞类别',
-          })}
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable1.vul_remarks"
-                  defaultMessage="备注必填"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="vul_remarks"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.vul_remarks',
-            defaultMessage: '备注',
-          })}
-        />
-      </ModalForm>
-      <UpdateForm
-        onSubmit={async (value) => {
-          const success = await handleUpdate(value);
-          if (success) {
-            handleUpdateModalVisible(false);
-            setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-        onCancel={() => {
-          handleUpdateModalVisible(false);
-          if (!showDetail) {
-            setCurrentRow(undefined);
-          }
-        }}
-        updateModalVisible={updateModalVisible}
-        values={currentRow || {}}
-      />
+      {/*  </FooterToolbar>*/}
+      {/*)}*/}
+      {/*<ModalForm*/}
+      {/*  title={intl.formatMessage({*/}
+      {/*    id: 'pages.searchTable.createForm.newVul',*/}
+      {/*    defaultMessage: 'New vul',*/}
+      {/*  })}*/}
+      {/*  width="400px"*/}
+      {/*  visible={createModalVisible}*/}
+      {/*  onVisibleChange={handleModalVisible}*/}
+      {/*  onFinish={async (value) => {*/}
+      {/*    const success = await handleAdd(value as API.VulListItem);*/}
+      {/*    if (success) {*/}
+      {/*      handleModalVisible(false);*/}
+      {/*      if (actionRef.current) {*/}
+      {/*        actionRef.current.reload();*/}
+      {/*      }*/}
+      {/*    }*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_id"*/}
+      {/*            defaultMessage="漏洞编号必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_id"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_id',*/}
+      {/*      defaultMessage: '漏洞编号',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_name"*/}
+      {/*            defaultMessage="漏洞名称必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_name"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_name',*/}
+      {/*      defaultMessage: '漏洞名称',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_jira"*/}
+      {/*            defaultMessage="jira工单为必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_jira"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_jira',*/}
+      {/*      defaultMessage: 'jira工单',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_sendto"*/}
+      {/*            defaultMessage="发送对象必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_sendto"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_sendto',*/}
+      {/*      defaultMessage: '发送对象',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_fixer"*/}
+      {/*            defaultMessage="修复人员必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_fixer"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_fixer',*/}
+      {/*      defaultMessage: '修复人员',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_sendtime"*/}
+      {/*            defaultMessage="发送时间必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_sendtime"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_sendtime',*/}
+      {/*      defaultMessage: '发送时间',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_estimatefixedtime"*/}
+      {/*            defaultMessage="预计修复时间必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_estimatefixedtime"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_estimatefixedtime',*/}
+      {/*      defaultMessage: '预计修复时间',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_fixedtime"*/}
+      {/*            defaultMessage="完成修复时间必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_fixedtime"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_fixedtime',*/}
+      {/*      defaultMessage: '完成修复时间',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_isfixed"*/}
+      {/*            defaultMessage="是否修复必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_isfixed"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_isfixed',*/}
+      {/*      defaultMessage: '是否修复',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_type"*/}
+      {/*            defaultMessage="漏洞类别必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_type"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_type',*/}
+      {/*      defaultMessage: '漏洞类别',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*  <ProFormText*/}
+      {/*    rules={[*/}
+      {/*      {*/}
+      {/*        required: true,*/}
+      {/*        message: (*/}
+      {/*          <FormattedMessage*/}
+      {/*            id="pages.searchTable1.vul_remarks"*/}
+      {/*            defaultMessage="备注必填"*/}
+      {/*          />*/}
+      {/*        ),*/}
+      {/*      },*/}
+      {/*    ]}*/}
+      {/*    width="md"*/}
+      {/*    name="vul_remarks"*/}
+      {/*    label={intl.formatMessage({*/}
+      {/*      id: 'pages.searchTable.vul_remarks',*/}
+      {/*      defaultMessage: '备注',*/}
+      {/*    })}*/}
+      {/*  />*/}
+      {/*</ModalForm>*/}
+      {/*<UpdateForm*/}
+      {/*  onSubmit={async (value) => {*/}
+      {/*    const success = await handleUpdate(value);*/}
+      {/*    if (success) {*/}
+      {/*      handleUpdateModalVisible(false);*/}
+      {/*      setCurrentRow(undefined);*/}
+      {/*      if (actionRef.current) {*/}
+      {/*        actionRef.current.reload();*/}
+      {/*      }*/}
+      {/*    }*/}
+      {/*  }}*/}
+      {/*  onCancel={() => {*/}
+      {/*    handleUpdateModalVisible(false);*/}
+      {/*    if (!showDetail) {*/}
+      {/*      setCurrentRow(undefined);*/}
+      {/*    }*/}
+      {/*  }}*/}
+      {/*  updateModalVisible={updateModalVisible}*/}
+      {/*  values={currentRow || {}}*/}
+      {/*/>*/}
 
       <Drawer
         width={600}

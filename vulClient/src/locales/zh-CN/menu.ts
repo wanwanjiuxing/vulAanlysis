@@ -13,6 +13,10 @@ export default {
   'menu.vuls.mdn': '虚拟化平台',
   'menu.vuls.mdc': '新目睹云',
   'menu.vuls.other': '其他',
+  'menu.charts': '图表统计',
+  'menu.charts.vulFix': '漏洞修复统计',
+  'menu.charts.vulType': '漏洞类型统计',
+
   'menu.login': '登录',
   'menu.register': '注册',
   'menu.register-result': '注册结果',

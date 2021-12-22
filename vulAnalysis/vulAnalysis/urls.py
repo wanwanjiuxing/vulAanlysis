@@ -15,32 +15,35 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,re_path
-from vulList import views
+from vulList import views,chatViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('^api/youkeVulList/$',views.YoukeVulListView.as_view()),
-    re_path('^api/youkeVulList/(?P<pk>\d+)/$',views.YoukeVulListDetailView.as_view()),
+    re_path('^api/youkeVulList/(?P<pk>[a-zA-Z0-9]+)/$',views.YoukeVulListDetailView.as_view()),
 
     re_path('^api/qiboVulList/$',views.QiboVulListView.as_view()),
-    re_path('^api/qiboVulList/(?P<pk>\d+)/$',views.QiboVulListDetailView.as_view()),
+    re_path('^api/qiboVulList/(?P<pk>[a-zA-Z0-9]+)/$',views.QiboVulListDetailView.as_view()),
 
     re_path('^api/zhiboVulList/$', views.ZhiboVulListView.as_view()),
-    re_path('^api/zhiboVulList/(?P<pk>\d+)/$', views.ZhiboVulListDetailView.as_view()),
+    re_path('^api/zhiboVulList/(?P<pk>[a-zA-Z0-9]+)/$', views.ZhiboVulListDetailView.as_view()),
 
     re_path('^api/myunVulList/$', views.MyunVulListView.as_view()),
-    re_path('^api/myunVulList/(?P<pk>\d+)/$', views.MyunVulListDetailView.as_view()),
+    re_path('^api/myunVulList/(?P<pk>[a-zA-Z0-9]+)/$', views.MyunVulListDetailView.as_view()),
 
     re_path('^api/mdnVulList/$', views.MdnVulListView.as_view()),
-    re_path('^api/mdnVulList/(?P<pk>\d+)/$', views.MdnVulListDetailView.as_view()),
+    re_path('^api/mdnVulList/(?P<pk>[a-zA-Z0-9]+)/$', views.MdnVulListDetailView.as_view()),
     #mdc漏洞路由
     re_path('^api/mdcVulList/$', views.MdcVulListView.as_view()),
-    re_path('^api/mdcVulList/(?P<pk>\d+)/$', views.MdcVulListDetailView.as_view()),
+    re_path('^api/mdcVulList/(?P<pk>[a-zA-Z0-9]+)/$', views.MdcVulListDetailView.as_view()),
     #其他漏洞路由
     re_path('^api/otherVulList/$', views.OtherVulListView.as_view()),
-    re_path('^api/otherVulList/(?P<pk>\d+)/$', views.OtherVulListDetailView.as_view()),
+    re_path('^api/otherVulList/(?P<pk>[a-zA-Z0-9]+)/$', views.OtherVulListDetailView.as_view()),
     #所有漏洞路由
     re_path('^api/totalVulList/$', views.TotalVulListView.as_view()),
-    re_path('^api/totalVulList/(?P<pk>\d+)/$', views.TotalVulListDetailView.as_view()),
+    re_path('^api/totalVulList/(?P<pk>[a-zA-Z0-9]+)/$', views.TotalVulListDetailView.as_view()),
+
+    #漏洞数量展示
+    re_path('^api/charts/total/$', chatViews.TotalChartsView.as_view()),
 
 ]

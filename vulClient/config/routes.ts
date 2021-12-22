@@ -18,7 +18,34 @@
       },
     ],
   },
-
+  {
+    path: '/welcome',
+    name: 'welcome',
+    icon: 'smile',
+    component: './Welcome',
+  },
+  {
+    path: '/charts',
+    name: 'charts',
+    icon: 'table',
+    routes: [
+      {
+        path: '/charts/vulFixCharts',
+        name: 'vulFix',
+        icon: 'smile',
+        component: './charts/VulFixCharts',
+      },
+      // {
+      //   path: '/charts/vulType',
+      //   name: 'vulType',
+      //   icon: 'smile',
+      //   component: './charts/VulType',
+      // },
+      {
+        component: './404',
+      },
+    ],
+  },
   {
     path: '/vuls',
     name: 'vuls',
@@ -84,12 +111,12 @@
   //   path: '/list',
   //   component: './TableList',
   // },
-  {
-    name: 'list.vul-list',
-    icon: 'table',
-    path: '/vullist',
-    component: './VulList',
-  },
+  // {
+  //   name: 'list.vul-list',
+  //   icon: 'table',
+  //   path: '/vullist',
+  //   component: './VulList',
+  // },
   {
     path: '/',
     redirect: '/welcome',
