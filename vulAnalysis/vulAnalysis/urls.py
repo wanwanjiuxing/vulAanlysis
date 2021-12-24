@@ -45,5 +45,13 @@ urlpatterns = [
 
     #漏洞数量展示
     re_path('^api/charts/total/$', chatViews.TotalChartsView.as_view()),
+    re_path('^api/charts/totalByItem/$', chatViews.TotalByItemChartsView.as_view()),
+    re_path('^api/charts/totalByType/$', chatViews.TotalByTypeChartsView.as_view()),
+    re_path('^api/charts/totalByTimeRise/$', chatViews.TotalByTimeRiseChartsView.as_view()),
+    re_path('^api/charts/totalByTimeFix/$', chatViews.TotalByTimeFixChartsView.as_view()),
+
+    #添加数据接口
+    re_path('^api/totalVulsRise/$', chatViews.TotalVulsRiseView.as_view()),
+    re_path('^api/totalVulsFix/$', chatViews.TotalVulsFixView.as_view()),
 
 ]

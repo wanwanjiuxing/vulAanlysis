@@ -105,3 +105,12 @@ class Total_VulModel(models.Model):
     vul_isfixed = models.IntegerField(verbose_name="是否修复",default=0)
     vul_type = models.IntegerField(verbose_name="漏洞类型",default=0)
     vul_remarks = models.CharField(max_length=128,verbose_name="备注",default="--")
+
+class Total_vulsRiseModel(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    vuls_amount = models.IntegerField(verbose_name="漏洞数量", default=0)
+
+class Total_vulsFixModel(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
