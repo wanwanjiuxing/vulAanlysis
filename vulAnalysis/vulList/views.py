@@ -1439,3 +1439,4 @@ class TotalVulListDetailView(View):
             "success": "200",
             "data": "删除成功",
         })
+
