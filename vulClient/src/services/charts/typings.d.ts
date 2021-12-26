@@ -84,6 +84,52 @@ declare namespace API2 {
     fixingAmount?: number;
     fixedRate?: string;
   };
+  type VulTotalByType = {
+    success?: string;
+    data?: VulTotalByTypeItem[];
+  };
+  type VulTotalByTypeItem = {
+    item?: string;
+    amount?: number;
+  };
+
+  type VulTotalByTime = {
+    success?: string;
+    data?: VulTotalByTimeItem[];
+  };
+  type VulTotalByTimeItem = {
+    data_id?: string;
+    vuls_amount?: number;
+  };
+
+  type VulTotalByTimeFix = {
+    success?: string;
+    data?: VulTotalByTimeFixItem;
+  };
+  type VulTotalByTimeFixItem = {
+    data1?: VulTotalByTimeFixItemData1[];
+    data2?: VulTotalByTimeFixItemData2[];
+  };
+  type VulTotalByTimeFixItemData1 = {
+    item?: string;
+    value?: number;
+    type?: string;
+  };
+  type VulTotalByTimeFixItemData2 = {
+    item?: string;
+    rate?: number;
+  };
+
+  type VulTotalByItem = {
+    success?: string;
+    data?: VulTotalByItemList[];
+  };
+  type VulTotalByItemList = {
+    item?: string;
+    fixedAmount?: number;
+    fixingAmount?: number;
+    fixedRate?: number;
+  };
 
   type FakeCaptcha = {
     code?: number;

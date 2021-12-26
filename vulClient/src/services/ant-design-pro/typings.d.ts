@@ -85,6 +85,17 @@ declare namespace API {
     fixedRate?: string;
   };
 
+  type VulTotalByItem = {
+    success?: string;
+    data?: VulTotalByItemList[];
+  };
+  type VulTotalByItemList = {
+    item?: string;
+    fixedAmount?: number;
+    fixingAmount?: number;
+    fixedRate?: string;
+  };
+
   type FakeCaptcha = {
     code?: number;
     status?: string;

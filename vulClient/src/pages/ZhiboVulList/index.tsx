@@ -165,6 +165,11 @@ const TableList: React.FC = () => {
       valueType: 'textarea',
     },
     {
+      title: <FormattedMessage id="pages.searchTable.vul_type" defaultMessage="vul type" />,
+      dataIndex: 'vul_type',
+      valueType: 'textarea',
+    },
+    {
       title: <FormattedMessage id="pages.searchTable.vul_remarks" defaultMessage="vul remarks" />,
       dataIndex: 'vul_remarks',
       valueType: 'textarea',
