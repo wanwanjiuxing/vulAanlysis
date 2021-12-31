@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,re_path
 from vulList import views,chatViews
-
+#
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('^api/youkeVulList/$',views.YoukeVulListView.as_view()),
