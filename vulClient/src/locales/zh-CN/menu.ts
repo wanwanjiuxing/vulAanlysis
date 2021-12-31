@@ -14,8 +14,10 @@ export default {
   'menu.vuls.mdc': '新目睹云',
   'menu.vuls.other': '其他',
   'menu.charts': '图表统计',
-  'menu.charts.vulFix': '漏洞修复统计',
+  'menu.charts.vulFix': '漏洞统计',
   'menu.charts.vulType': '漏洞类型统计',
+  'menu.charts.VulRiseByTimeCharts': '漏洞增长趋势',
+  'menu.charts.VulFixByTimeCharts': '漏洞修复趋势',
 
   'menu.login': '登录',
   'menu.register': '注册',

@@ -192,3 +192,44 @@ class Total_vulsFixItem8Model(models.Model):
     data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
     fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
     fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+
+# 漏洞修复趋势图by项目--有课
+class Total_vulsFixItem1Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--官网
+class Total_vulsFixItem2Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--企播
+class Total_vulsFixItem3Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--直播
+class Total_vulsFixItem4Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--目睹云
+class Total_vulsFixItem5Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--MDN
+class Total_vulsFixItem6Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--MDC
+class Total_vulsFixItem7Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)
+# 漏洞修复趋势图by项目--互联网
+class Total_vulsFixItem8Model(models.Model):
+    data_id = models.CharField(max_length=128, verbose_name="日期", default="1/1")
+    fixed_amount = models.IntegerField(verbose_name="已整改漏洞", default=0)
+    fixing_amount = models.IntegerField(verbose_name="未整改漏洞", default=0)

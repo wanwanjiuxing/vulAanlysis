@@ -2,15 +2,15 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** 获取当前的用户 GET /api/currentUser */
-export async function currentUser(options?: { [key: string]: any }) {
-  return request<{
-    data: API.CurrentUser;
-  }>('/api/currentUser', {
-    method: 'GET',
-    ...(options || {}),
-  });
-}
+// /** 获取当前的用户 GET /api/currentUser */
+// export async function currentUser(options?: { [key: string]: any }) {
+//   return request<{
+//     data: API.CurrentUser;
+//   }>('/api/currentUser', {
+//     method: 'GET',
+//     ...(options || {}),
+//   });
+// }
 
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
@@ -20,17 +20,7 @@ export async function outLogin(options?: { [key: string]: any }) {
   });
 }
 
-/** 登录接口 POST /api/login/account */
-export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
-  return request<API.LoginResult>('/api/login/account', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
-    ...(options || {}),
-  });
-}
+
 
 /** 此处后端没有提供注释 GET /api/notices */
 export async function getNotices(options?: { [key: string]: any }) {
@@ -76,7 +66,7 @@ export async function addRule(options?: { [key: string]: any }) {
   });
 }
 
-/** 删除规则 DELETE /api/rule */
+/** 删除 DELETE /api/rule */
 export async function removeRule(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/rule', {
     method: 'DELETE',
@@ -87,7 +77,7 @@ export async function removeRule(options?: { [key: string]: any }) {
 /** 查询漏洞列表 GET /api/totalVulList/ */
 export async function vulList() {
 
-  return request<API.VulList>('/api/totalVulList/', {
+  return request<API.VulList>('http://vuls.xiaowulaile.com:18888/api/totalVulList/', {
     method: 'GET',
   });
 }
@@ -95,7 +85,7 @@ export async function vulList() {
 /** 新建漏洞 POST /api/totalVulList/ */
 export async function addVul(options?: any) {
   console.log(JSON.stringify(options))
-  return request<API.VulListItem>('/api/totalVulList/', {
+  return request<API.VulListItem>('http://vuls.xiaowulaile.com:18888/api/totalVulList/', {
     method: 'POST',
     body: JSON.stringify(options),
   });
@@ -105,7 +95,7 @@ export async function addVul(options?: any) {
 export async function removeVul(options?: { [key: string]: any }) {
   console.log(options)
   options?.key.forEach((val:any) => {
-    return request<Record<string, any>>('/api/totalVulList/' + val.toString() +'/', {
+    return request<Record<string, any>>('http://vuls.xiaowulaile.com:18888/api/totalVulList/' + val.toString() +'/', {
       method: 'DELETE',
     });
   })
@@ -115,9 +105,30 @@ export async function removeVul(options?: { [key: string]: any }) {
 /** 更新漏洞 PUT /api/totalVulList/ */
 export async function updateVul(options?: any) {
   console.log(JSON.stringify(options));
-  return request<API.VulListItem>('/api/totalVulList/'+ options.vul_id + '/', {
+  return request<API.VulListItem>('http://vuls.xiaowulaile.com:18888/api/totalVulList/'+ options.vul_id + '/', {
     method: 'PUT',
     body: JSON.stringify(options),
   });
 }
 
+/** 登录接口 POST /api/login/ */
+export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
+  return request<API.LoginResult>('http://vuls.xiaowulaile.com:18888/api/login/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 获取当前的用户 GET /api/login/ */
+export async function currentUser(options?: { [key: string]: any }) {
+  return request<{
+    data: API.CurrentUser;
+  }>('http://vuls.xiaowulaile.com:18888/api/user/', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}

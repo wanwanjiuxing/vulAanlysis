@@ -5,7 +5,7 @@ import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { ModalForm, ProFormText, } from '@ant-design/pro-form';
+import {ModalForm, ProFormSelect, ProFormText,} from '@ant-design/pro-form';
 import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
@@ -163,11 +163,103 @@ const TableList: React.FC = () => {
       title: <FormattedMessage id="pages.searchTable.vul_isfixed" defaultMessage="vul isfixed" />,
       dataIndex: 'vul_isfixed',
       valueType: 'textarea',
+      renderText: (val: string) => {
+        if(val == '1'){
+          return (
+            intl.formatMessage({
+              id: 'pages.searchTable.isFixed',
+              defaultMessage: ' 是 ',
+            })
+          );
+        }else{
+          return (
+            intl.formatMessage({
+              id: 'pages.searchTable.unFixed',
+              defaultMessage: ' 否 ',
+            })
+          );
+        }
+      },
     },
     {
       title: <FormattedMessage id="pages.searchTable.vul_type" defaultMessage="vul type" />,
       dataIndex: 'vul_type',
       valueType: 'textarea',
+      renderText: (val: number) => {
+        console.log(val);
+        switch(val){
+          case 1:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type1',
+                defaultMessage: ' 输入输出 ',
+              })
+            );
+            break;
+          case 2:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type2',
+                defaultMessage: ' 用户权限 ',
+              })
+            );
+            break;
+          case 3:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type3',
+                defaultMessage: ' 第三方组件 ',
+              })
+            );
+            break;
+          case 4:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type4',
+                defaultMessage: ' 安全配置 ',
+              })
+            );
+            break;
+          case 5:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type5',
+                defaultMessage: ' 文件上传下载 ',
+              })
+            );
+            break;
+          case 6:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type6',
+                defaultMessage: ' 命令执行&代码执行 ',
+              })
+            );
+            break;
+          case 7:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type7',
+                defaultMessage: ' 业务逻辑 ',
+              })
+            );
+            break;
+          case 8:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type8',
+                defaultMessage: ' 弱口令 ',
+              })
+            );
+          default:
+            return (
+              intl.formatMessage({
+                id: 'pages.searchTable.type9',
+                defaultMessage: ' 其他 ',
+              })
+            );
+        }
+      },
     },
     {
       title: <FormattedMessage id="pages.searchTable.vul_remarks" defaultMessage="vul remarks" />,
@@ -232,6 +324,7 @@ const TableList: React.FC = () => {
         ]}
         request={vulList}
         columns={columns}
+        search={false}
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
@@ -434,7 +527,7 @@ const TableList: React.FC = () => {
             defaultMessage: '完成修复时间',
           })}
         />
-        <ProFormText
+        <ProFormSelect
           rules={[
             {
               required: true,
@@ -447,13 +540,18 @@ const TableList: React.FC = () => {
             },
           ]}
           width="md"
+          placeholder="请选择是否修复"
           name="vul_isfixed"
           label={intl.formatMessage({
             id: 'pages.searchTable.vul_isfixed',
             defaultMessage: '是否修复',
           })}
+          valueEnum={{
+            1:'是',
+            0:'否',
+          }}
         />
-        <ProFormText
+        <ProFormSelect
           rules={[
             {
               required: true,
@@ -471,6 +569,18 @@ const TableList: React.FC = () => {
             id: 'pages.searchTable.vul_type',
             defaultMessage: '漏洞类别',
           })}
+          valueEnum={{
+            1:'输入输出',
+            2:'用户权限',
+            3:'第三方组件',
+            4:'安全配置',
+            5:'文件上传下载',
+            6:'命令执行&代码执行',
+            7:'业务逻辑',
+            8:'弱口令',
+            9:'其他',
+          }}
+          placeholder="请选择漏洞类别"
         />
         <ProFormText
           rules={[

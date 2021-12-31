@@ -152,9 +152,14 @@ const VulFixCharts: React.FC = () => {
         minLimit:0,
         maxLimit: 100,
         tickCount: 11,
+        tickInterval: 10,
       },
       value:{
         tickCount: 11,
+        min: 0,
+        max: 10,
+        tickInterval: 1,
+        maxLimit: 10,
       },
     },
     meta: {
@@ -189,7 +194,9 @@ const VulFixCharts: React.FC = () => {
     yAxis: {
       min: 0,
       minLimit:0,
+      maxLimit:10,
       tickCount: 11,
+      tickInterval: 1,
     },
     meta: {
       item: {

@@ -1079,6 +1079,250 @@ class TotalVulsRiseType9View(View):
             "data": resDict,
         })
 
+#   添加目睹漏洞增长数据接口-输入输出
+class TotalVulsRiseType1View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType1Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-用户权限
+class TotalVulsRiseType2View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType2Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-第三方组件
+class TotalVulsRiseType3View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType3Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-安全配置
+class TotalVulsRiseType4View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType4Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-文件上传下载
+class TotalVulsRiseType5View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType5Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-命令执行&代码执行
+class TotalVulsRiseType6View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType6Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-业务逻辑
+class TotalVulsRiseType7View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType7Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-弱口令
+class TotalVulsRiseType8View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType8Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+#   添加目睹漏洞增长数据接口-其他
+class TotalVulsRiseType9View(View):
+    def post(self,request):
+        data_bytes = request.body
+        data_str = data_bytes.decode()
+        data_dict = json.loads(data_str)
+
+        try:
+            data = models.Total_vulsRiseType9Model(
+                data_id = data_dict['data_id'],
+                vuls_amount = data_dict['vuls_amount'],
+            )
+            data.save()
+
+        except data.DoesNotExist:
+            return JsonResponse({
+                "success": "404",
+                "data": "添加失败",
+            })
+        resDict = {
+            "data_id":data.data_id,
+            "vuls_amount":data.vuls_amount,
+        }
+        return JsonResponse({
+            "success": "200",
+            "data": resDict,
+        })
+
 #  添加目睹漏洞修复趋势图数据接口
 class TotalVulsFixView(View):
     def post(self,request):

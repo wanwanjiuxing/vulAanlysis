@@ -21,6 +21,7 @@
   {
     path: '/welcome',
     name: 'welcome',
+    access: 'canAdmin',
     icon: 'smile',
     component: './Welcome',
   },
@@ -34,6 +35,18 @@
         name: 'vulFix',
         icon: 'smile',
         component: './charts/VulFixCharts',
+      },
+      {
+        path: '/charts/VulRiseByTimeCharts',
+        name: 'VulRiseByTimeCharts',
+        icon: 'smile',
+        component: './charts/VulRiseByTimeCharts',
+      },
+      {
+        path: '/charts/VulFixByTimeCharts',
+        name: 'VulFixByTimeCharts',
+        icon: 'smile',
+        component: './charts/VulFixByTimeCharts',
       },
       // {
       //   path: '/charts/vulType',
